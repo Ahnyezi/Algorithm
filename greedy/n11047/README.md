@@ -139,7 +139,11 @@ public class Main {
  ```
  
  #### 속도비교 <br/>
- ![image](https://user-images.githubusercontent.com/62331803/91653428-c7db5900-eadb-11ea-9824-961c3f8e99f1.png)
+ ![image](https://user-images.githubusercontent.com/62331803/91653428-c7db5900-eadb-11ea-9824-961c3f8e99f1.png) 
+ <br/>
+ 
+ - 위: bufferedreader 사용
+ - 아래: scanner 사용
 
 ##### TIP
 입출력 BufferedReader와 Scanner의 차이<br/>
