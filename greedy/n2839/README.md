@@ -1,4 +1,4 @@
-# 문제2839 | 설탕배달
+# 문제2839 | 설탕배달 (오답)
 상근이는 요즘 설탕공장에서 설탕을 배달하고 있다. <br/>
 상근이는 지금 사탕가게에 설탕을 정확하게 N킬로그램을 배달해야 한다.  <br/>
 설탕공장에서 만드는 설탕은 봉지에 담겨져 있다. 봉지는 3킬로그램 봉지와 5킬로그램 봉지가 있다. <br/>
@@ -40,5 +40,31 @@
 #### 피드백
 ` 백준은 Scanner로 입력받아서 System으로 출력하는 것으로 채점`
 - n%5==0인 상황을 만들기 위해서 -3을 우선적으로 처리해준다.<br/>
-` n-=3; cnt++; `
+```java
+while (n % 5 != 0 && n > 0) {
+			n -= 3;
+			cnt++;
+		}
+```
 - 5와 3으로 처리 불가능한 영역은 n이 음수가 되는 경우로 한번에 처리
+
+# 전체코드
+```java
+import java.util.*;
+
+public class Main {// 1h 19m
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int cnt = 0, answer = 0, n = sc.nextInt();
+
+		while (n % 5 != 0 && n > 0) {
+			n -= 3;
+			cnt++;
+		}
+		answer = (n < 0) ? -1 : n / 5 + cnt;
+		System.out.println(answer);
+		sc.close();
+	}
+}
+
+```
