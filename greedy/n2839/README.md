@@ -48,23 +48,25 @@ while (n % 5 != 0 && n > 0) {
 ```
 - 5와 3으로 처리 불가능한 영역은 n이 음수가 되는 경우로 한번에 처리
 
-# 전체코드
+# 다른답안
 ```java
-import java.util.*;
+import java.util.Scanner;
 
-public class Main {// 1h 19m
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		int cnt = 0, answer = 0, n = sc.nextInt();
-
-		while (n % 5 != 0 && n > 0) {
-			n -= 3;
-			cnt++;
-		}
-		answer = (n < 0) ? -1 : n / 5 + cnt;
-		System.out.println(answer);
-		sc.close();
-	}
+public class Main {
+    public static int nThree;
+    public static int answer;
+	
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+    	
+        while(n % 5 != 0 && n >= 0) {
+            n -= 3;
+            ++nThree;
+        }
+        answer = n < 0 ? -1 : nThree + n/5; //조건 삼항 처리
+        
+        System.out.println(answer);
+    }
 }
-
 ```
