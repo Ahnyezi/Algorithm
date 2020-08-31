@@ -8,6 +8,7 @@
 <details>
 	<summary>열기</summary>
   <img src="https://user-images.githubusercontent.com/62331803/91730194-9b5d3500-ebe0-11ea-8c55-b3282fd557f6.png" width="20%"> <br/>
+	
   - 입력 예제: 이미 정렬되어 있는 상태
   - 정렬된 방식을 봐라 ==> 종료시간을 기준으로 정렬
 </details>
@@ -15,6 +16,7 @@
 ### 2. 정렬 방법 다양하게 생각 못함<br/>
 <details>
 	<summary>열기</summary>
+	
   - 방법1: 시작시간 기준 정렬 (반례 O) <br/>
   <img src="https://user-images.githubusercontent.com/62331803/91729840-1a05a280-ebe0-11ea-8ed5-c58760190b1c.png" width="50%">
   <br/>
