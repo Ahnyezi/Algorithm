@@ -2,6 +2,54 @@
 
 # 문제 1931 | 회의실 배정 (오답+개오래걸림) ☆☆☆☆
 
+## 피드백
+
+### 1. 입출력 예제에 힌트가 있다! <br/>
+<details>
+	<summary>열기</summary>
+  <img src="https://user-images.githubusercontent.com/62331803/91730194-9b5d3500-ebe0-11ea-8c55-b3282fd557f6.png" width="20%"> <br/>
+  - 입력 예제: 이미 정렬되어 있는 상태
+  - 정렬된 방식을 봐라 ==> 종료시간을 기준으로 정렬
+</details>
+
+### 2. 정렬 방법 다양하게 생각 못함<br/>
+<details>
+	<summary>열기</summary>
+  - 방법1: 시작시간 기준 정렬 (반례 O) <br/>
+  <img src="https://user-images.githubusercontent.com/62331803/91729840-1a05a280-ebe0-11ea-8ed5-c58760190b1c.png" width="50%">
+  <br/>
+  
+  - 방법2(내가 푼 방식): 회의시간 기준 정렬 (반례 O) <br/>
+  <img src="https://user-images.githubusercontent.com/62331803/91729866-225ddd80-ebe0-11ea-8d5b-f7689e160104.png" width="50%">
+  <br/>
+  
+  - 방법3: 종료시간 기준 정렬 (일부 예외만 처리한다면 적합 => 시작,종료시간 같은 경우)
+    - `예시` 
+    ```python
+    def greedy(meeting):
+    end_time = 0 # 이전 회의의 종료시간
+    meeting_count = 0
+
+    for time in meeting:
+        if end_time <= time[0]: # 이전 회의 종료시간 <= 현재 회의 시작시간
+            meeting_count += 1
+            end_time = time[1] # 현재 회의 종료시간
+    return meeting_count
+    ```
+    - (2,2) (1,2) ...의 경우
+    - 종료시간만을 기준으로 sorting 하면 모든 경우를 cover하지 못함
+    - end_time이 2일 때 time[0]인 1이 더 작기 때문에, meeting_count에 포함될 수 없음
+    - 따라서, 종료시간으로 sorting 하기 전에 시작시간으로 미리 sorting 해서
+    - 이런 case를 cover한다
+
+</details>
+
+### 3. 파이썬이 훨씬 간단<br/>
+
+  - 지금 내 수준에서 파이썬으로 알고리즘 공부한 뒤에 자바로 바꾸는 게 낫겠다
+
+<br/>
+
 ## 문제
 <details>
 <summary> 문제보기 </summary>
@@ -31,51 +79,6 @@
 
 <br/>
 
-## 피드백
-
-#### 못 푼 이유
-#### 0. 입출력 예제에 힌트가 있다! <br/>
-  <img src="https://user-images.githubusercontent.com/62331803/91730194-9b5d3500-ebe0-11ea-8c55-b3282fd557f6.png" width="30%" align="right">
-  - 입력 예제: 이미 정렬되어 있는 상태
-  - 정렬된 방식을 봐라 ==> 종료시간을 기준으로 정렬
-
-
-#### 1. 정렬 방법 다양하게 생각 못함<br/>
-  - 방법1: 시작시간 기준 정렬 (반례 O) <br/>
-  <img src="https://user-images.githubusercontent.com/62331803/91729840-1a05a280-ebe0-11ea-8ed5-c58760190b1c.png" width="50%">
-  <br/>
-  
-  - 방법2(내가 푼 방식): 회의시간 기준 정렬 (반례 O) <br/>
-  <img src="https://user-images.githubusercontent.com/62331803/91729866-225ddd80-ebe0-11ea-8d5b-f7689e160104.png" width="50%">
-  <br/>
-  
-  - 방법3: 종료시간 기준 정렬 (일부 예외만 처리한다면 적합 => 시작,종료시간 같은 경우)
-    - `예시` 
-    ```python
-    def greedy(meeting):
-    end_time = 0 # 이전 회의의 종료시간
-    meeting_count = 0
-
-    for time in meeting:
-        if end_time <= time[0]: # 이전 회의 종료시간 <= 현재 회의 시작시간
-            meeting_count += 1
-            end_time = time[1] # 현재 회의 종료시간
-    return meeting_count
-    ```
-    - (2,2) (1,2) ...의 경우
-    - 종료시간만을 기준으로 sorting 하면 모든 경우를 cover하지 못함
-    - end_time이 2일 때 time[0]인 1이 더 작기 때문에, meeting_count에 포함될 수 없음
-    - 따라서, 종료시간으로 sorting 하기 전에 시작시간으로 미리 sorting 해서
-    - 이런 case를 cover한다
-
-    
-<br/>
-
-#### 2. 파이썬이 훨씬 간단<br/>
-
-  - 지금 내 수준에서 파이썬으로 알고리즘 공부한 뒤에 자바로 바꾸는 게 낫겠다
-
-<br/>
 
 ## 전체코드
 
