@@ -4,7 +4,28 @@
 
 ## 피드백
 
-### 1. 뺄셈말고 나눗셈도 가능 <br/>
+### 1. 뺄셈말고 나눗셈도 가능 
+
+#### 다른풀이
+
+```python
+
+import sys
+
+change = 1000 - int(sys.stdin.readline())
+coins = [500,100,50,10,5,1]
+count = 0
+
+for c in coins:
+    count += change//c
+    change %= c
+
+print(count)
+
+
+```
+
+<br/>
 
 ## 문제
 <details>
@@ -55,7 +76,6 @@ if __name__ == "__main__":
 
     print(count)
 
-'''
 # 1차시도
 import sys
 
@@ -75,23 +95,3 @@ if __name__ == "__main__":
     print(count)
 '''
 
-#### 다른풀이
-
-```python
-
-import sys
-
-change = 1000 - int(sys.stdin.readline())
-coins = [500,100,50,10,5,1]
-count = 0
-
-for c in coins:
-    count += change//c
-    change %= c
-
-print(count)
-
-
-```
-
-```
