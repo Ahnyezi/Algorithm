@@ -101,17 +101,18 @@ print(sorted(max)[num-1])
 #### 1차시도(실패) - 너무 단순하게 생각함
 ```python
 
-# 1차시도
-# import sys
-# rope = []
-# max = []
-#
-# num = int(sys.stdin.readline())
-# for i in range(num):
-#     rope.append(int(sys.stdin.readline()))
-#
-# rope = sorted(rope)
-#
-# print(rope[0]*num)
+#1차시도
+import sys
+rope = []
+max = []
+
+num = int(sys.stdin.readline())
+for i in range(num):
+    rope.append(int(sys.stdin.readline()))
+
+rope = sorted(rope)
+
+print(rope[0]*num)
+
 '''
 
