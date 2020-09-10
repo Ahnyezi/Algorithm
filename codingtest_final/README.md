@@ -15,3 +15,22 @@ range까지의 수 중 정수 a나 b로 나누어떨어지는 수의 합 구하�
 느낌표-느낌표 연속 ==> 하나의 느낌표로 바꾸기
 
 ## 문제4번 | 펠린드롬 만들기 (4번 테스트케이스 통과못함..) 왜?
+정답
+``` python
+class Solution:
+    def isPalindrome(self, s):
+        s_reverse = ''.join(list(reversed(list(s))))
+        if s == s_reverse:
+            return True
+        else:
+            return False
+            
+    def solution(self, s):
+        flag = self.isPalindrome(s)
+        if not flag:
+            for i in range(len(s)):
+                s_reverse = ''.join(list(reversed(list(s[:i]))))
+                if self.isPalindrome(s + s_reverse):
+                    return len(s + s_reverse)
+        return len(s)
+```
