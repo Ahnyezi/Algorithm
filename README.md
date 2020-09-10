@@ -1,4 +1,4 @@
-# Algorithm
+# Algorithm 공부
 
 ## 백준
 - 
