@@ -99,7 +99,7 @@ print(d[N])
 ```
 
 # 3차
-- 런타임에러는 배열방 인덱스의 문제였다.
+- 런타임에러는 N=1일 때 COVER해주지 못하기 때문에 일어나는 문제였다.
 
 - 배열방 최대값인 301로 만들기
 ```python
@@ -120,6 +120,27 @@ for i in range(3,N+1):
 print(d[N])
 ```
 
+- N == 1인 경우 잡아주기
+```python
+import sys
+input = sys.stdin.readline
+N = int(input())
+points = [0] * (N+1)
+for i in range(1,N+1):
+    points[i] = int(input())
+
+d = [0]*(N+1)
+d[1] = points[1]
+
+if N > 1:
+    d[2] = max(d[1]+points[2],points[2])
+
+    for i in range(3,N+1):
+        d[i] = max(d[i-3]+points[i-1]+points[i],d[i-2]+points[i])
+
+print(d[N])
+
+```
 
 - 배열방 N+2개로 만들기
 ```python
@@ -144,4 +165,5 @@ print(d[N])
 ## 피드백
 - 추가적인 조건 만족시킬 수 있는 점화식 세우는 것 중요
     - 연속된 세수 불가능하게 하는 점화식
-- 배열방 인덱스 주의!!
+- N이 1일 때 주의하기!!!
+    - 기본 점화식에 사용되는 배열방 자체가 만들어지지 않으면, 런타임 에러 난다.
