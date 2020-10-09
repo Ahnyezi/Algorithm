@@ -5,8 +5,8 @@
 <br>
 
 ![image](https://user-images.githubusercontent.com/62331803/95402827-a166d400-094b-11eb-83c2-02fe218192ce.png)
-
 <br>
+
 ![image](https://user-images.githubusercontent.com/62331803/95402839-a7f54b80-094b-11eb-9e44-1da0e1f358f6.png)
 
 ## 입력
