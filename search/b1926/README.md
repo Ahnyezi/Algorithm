@@ -48,50 +48,51 @@ for i in range(n):
 
 > 전체 구조
 - 너비우선탐색 (queue 활용)
-   - 모든 배열방을 순회하면서 => for i in range (n): for j in range(m):
-   - 조건에 맞는 배열방에 들어가 => if i == 1: (0:그림 아님/1 이상:처리 완료)
-   - 너비를 우선으로 탐색 => for i in range(4): nx = x(현재) + dx(주변); ny = y(현재) + dy(주변)
+   - 모든 배열방을 순회하면서 => `for i in range (n): for j in range(m):`
+   - 조건에 맞는 배열방에 들어가 =>` if i == 1: # (0:그림 아님/1 이상:처리 완료)`
+   - 너비를 우선으로 탐색 => `for i in range(4): nx = x(현재) + dx(주변); ny = y(현재) + dy(주변)`
 - 배열 dx와 dy는 너비우선탐색을 위한 인덱스 값들
 - 모든 방을 순회하면 종료 후 "paints 배열 길이와 최대값" 출력
 
 > bfs 함수 내부 알고리즘
-1. 'bfs(i,j) 호출'
+1. bfs(i,j) 호출
+<br>
 
-
-2. '큐 생성 (이차원 배열의 x,y좌표)'
-- queue = deque ([i,j])
+2. 큐 생성 (이차원 배열의 x,y좌표)
+- `queue = deque ([i,j])`
 3. visted 배열에 (i,j)방 check
-- visted[i][j] = 1
+- `visted[i][j] = 1`
 4. 그림 개수 초기화
-- cnt = 1
+- `cnt = 1`
+<br>
 
-
-5. 'queue의 길이가 0이 될 때까지 반복'
-- while queue:
+5. queue의 길이가 0이 될 때까지 반복
+- `while queue:`
 6. queue의 0번째방 pop
-- x,y = queue.popleft()
+- `x,y = queue.popleft()`
 7. 상하좌우 검사
-- for i in range(4): nx = x + dx[i]; ny = y + dy[i]
+- `for i in range(4): nx = x + dx[i]; ny = y + dy[i]`
+<br>
 
-
-8. '그림개수연산 조건 확인'
+8. 그림개수연산 조건 확인
 - 이차원 배열 범위 한정
-    - if 0 <= nx < n and  0 <= ny < m:
+    - `if 0 <= nx < n and  0 <= ny < m:`
 - 아직 방문하지 않았으면서 값이 1인 배열방에 진입
-    - if visted[nx][ny] == 0 and canvas[nx][ny] != 0 :
+    - `if visited[nx][ny] == 0 and canvas[nx][ny] != 0 :`
 9. 현재 배열방의 상하좌우방이 2가지 조건에 맞는 경우 
 - 상하좌우방에 현재방 + 1 연산을 해주고, 방문했음을 체크
-    - canvas[nx][ny] = canvas[x][y] + 1
-    - visited[nx][ny] = 1
+    - `canvas[nx][ny] = canvas[x][y] + 1`
+    - `visited[nx][ny] = 1`
 - 그림 개수 증가시키기
-    - cnt += 1
+    - `cnt += 1`
 - 조건에 맞은 상하좌우방 인덱스 queue에 삽입 (해당 방은 그림이 있기 때문에, 그 방 상하좌우 다시 검사 필요)
-    - queue.append([nx,ny])
+    - `queue.append([nx,ny])`
+<br>
 
-
-10. 'queue 길이가 0이 되면 반복종료'
+10. queue 길이가 0이 되면 반복종료
 - queue에서 연산한 cnt(연결된 그림의 size)를 paints(그림들) 배열에 삽입
-    - paints.append(cnt)
+    - `paints.append(cnt)`
+<br>
 
 
 > 참고: deque 사용 이유
