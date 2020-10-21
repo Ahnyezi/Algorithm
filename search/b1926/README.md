@@ -42,65 +42,112 @@ for i in range(n):
         if canvas[n][m] == 1:
 ```
 
-## 2차 (답안 참고)
+## 2차 (답안 참고) => 성공
 
-- https://it-garden.tistory.com/173
-- 너비우선탐색 사용
+- 참고: https://it-garden.tistory.com/173
+
+> 전체 구조
+- 너비우선탐색 (queue 활용)
+   - 모든 배열방을 순회하면서 => for i in range (n): for j in range(m):
+   - 조건에 맞는 배열방에 들어가 => if i == 1: (0:그림 아님/1 이상:처리 완료)
+   - 너비를 우선으로 탐색 => for i in range(4): nx = x(현재) + dx(주변); ny = y(현재) + dy(주변)
+- 배열 dx와 dy는 너비우선탐색을 위한 인덱스 값들
+- 모든 방을 순회하면 종료 후 "paints 배열 길이와 최대값" 출력
+
+> bfs 함수 내부 알고리즘
+1. 'bfs(i,j) 호출'
+
+
+2. '큐 생성 (이차원 배열의 x,y좌표)'
+- queue = deque ([i,j])
+3. visted 배열에 (i,j)방 check
+- visted[i][j] = 1
+4. 그림 개수 초기화
+- cnt = 1
+
+
+5. 'queue의 길이가 0이 될 때까지 반복'
+- while queue:
+6. queue의 0번째방 pop
+- x,y = queue.popleft()
+7. 상하좌우 검사
+- for i in range(4): nx = x + dx[i]; ny = y + dy[i]
+
+
+8. '그림개수연산 조건 확인'
+- 이차원 배열 범위 한정
+    - if 0 <= nx < n and  0 <= ny < m:
+- 아직 방문하지 않았으면서 값이 1인 배열방에 진입
+    - if visted[nx][ny] == 0 and canvas[nx][ny] != 0 :
+9. 현재 배열방의 상하좌우방이 2가지 조건에 맞는 경우 
+- 상하좌우방에 현재방 + 1 연산을 해주고, 방문했음을 체크
+    - canvas[nx][ny] = canvas[x][y] + 1
+    - visited[nx][ny] = 1
+- 그림 개수 증가시키기
+    - cnt += 1
+- 조건에 맞은 상하좌우방 인덱스 queue에 삽입 (해당 방은 그림이 있기 때문에, 그 방 상하좌우 다시 검사 필요)
+    - queue.append([nx,ny])
+
+
+10. 'queue 길이가 0이 되면 반복종료'
+- queue에서 연산한 cnt(연결된 그림의 size)를 paints(그림들) 배열에 삽입
+    - paints.append(cnt)
+
+
+> 참고: deque 사용 이유
+- 정의
+   - deque: 스택과 큐를 합친 자료구조
+   - 가장자리에 원소를 넣거나 뺄 수 있음
+- 함수
+   - deque() : 초기화
+   - append(x) : x를 덱의 오른쪽에 삽입
+   - popleft() : 덱의 가장 왼쪽에 있는 원소를 제거, 해당 값을 리턴
+   - clear() : 모든 원소 삭제
+- 특징
+   - 큐 구현에 list를 사용하지 않음
+       - list도 사용가능. 하지만
+       - pop()의 시간복잡도는 O(1)
+       - pop(0)의 시간복잡도는 O(N)
+       - 따라서 시간복잡도를 고려해 list를 큐로 사용하지 않음
+
 
 ```python
 from collections import deque
 
 n,m = map(int,input().split())
 
-canvas = [list(map(int,input().split())) for i in range(n)] # canvas
-ch = [[0]*m for i in range(n)] # visited
+canvas = [list(map(int,input().split())) for i in range(n)]
+visited = [[0]*m for i in range(n)]
 
-# [dx][dy] : 상하좌우 확인용
 dx = [-1,0,1,0]
 dy = [0,1,0,-1]
-paints = [] # paints
-
-print('canvas:',canvas)
+paints = []
 
 def bfs(i,j):
-    print('bfs 함수 호출')
     queue = deque()
     queue.append([i,j])
-    print('queue:',queue)
-    ch[i][j] = 1
-    c = 1
-    print('ch:',ch)
+    visited[i][j] = 1
+    cnt = 1
 
     while queue:
         x,y = queue.popleft()
-        print('queue의 0번방 pop>>',end='')
-        print(x,y)
 
-        print('상하좌우 검사')
         for i in range(4): # 상하좌우
             nx = x + dx[i]
             ny = y + dy[i]
 
-            if 0 <= nx < n and 0 <= ny < m: # 범위 안에서만 check
-                if ch[nx][ny] == 0 and canvas[nx][ny] != 0: # 아직 방문 X and 배열방 1
-                    print('nx:',str(nx),'/ny:',str(ny))
-                    print('조건만족')
-                    canvas[nx][ny] = canvas[x][y] + 1 # ?
-                    ch[nx][ny] = 1 # visited에 체크
+            if 0 <= nx < n and 0 <= ny < m:
+                if visited[nx][ny] == 0 and canvas[nx][ny] != 0:
+                    canvas[nx][ny] = canvas[x][y] + 1 # 현재까지 합한 그림 size (이거 안하면 틀려)
+                    visited[nx][ny] = 1 # visited에 체크
 
-                    c += 1
-                    queue.append([nx,ny]) # ?
-                    print('canvas:',canvas)
-                    print('ch:',ch)
-                    print('queue:',queue)
-                    print('c:',c)
-        print()
+                    cnt += 1
+                    queue.append([nx,ny]) # 1이 있는 그 위치 queue방에 삽입
 
-    paints.append(c) # 그림크기 (이어져있는 1개수)
-    print('paints:',paints)
+    paints.append(cnt) # 그림크기 (이어져있는 1개수)
 
-for i in range(n):
-    for j in range(m):
+for i in range(n): # 세로로 한 줄씩 검사
+    for j in range(m): # 각 줄의 가장 첫번째 1이 나오는 방부터 bfs 처리
         if canvas[i][j] == 1:
             bfs(i,j)
 if len(paints) == 0:
@@ -109,4 +156,5 @@ if len(paints) == 0:
 else:
     print(len(paints))
     print(max(paints))
+
 ```
