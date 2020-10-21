@@ -309,7 +309,6 @@ if __name__ == '__main__':
     - 수정1: `queue = deque(); queue.append([i, j])` 
     - 수정2: `queue = queue = deque([[i, j]]) # 괄호 두번 필요`
 
-
 > 참고: deque 사용 이유
 - 정의
    - deque: 스택과 큐를 합친 자료구조
