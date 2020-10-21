@@ -42,7 +42,7 @@ for i in range(n):
         if canvas[n][m] == 1:
 ```
 
-## 2차 (답안 참고) => 성공
+## 2차 (답안 참고) 
 
 - 참고: https://it-garden.tistory.com/173
 
@@ -95,6 +95,8 @@ for i in range(n):
 <br>
 
 
+> 코드
+
 ```python
 from collections import deque
 
@@ -143,7 +145,169 @@ else:
 
 ```
 
+## 1차 (디버깅 오류: cannot unpack non-iterable int object ~deque) 
+> 코드
+```python
+import sys
+from collections import deque
+
+input = sys.stdin.readline
+n, m = map(int,input().split())
+canvas = [list(map(int,input().split())) for _ in range(n)] # 제공된 판
+visited = [[0]*m for _ in range(n)] # 방문여부확인
+paints = [] # 그림들
+dx = [-1,0,1,0]
+dy = [0,-1,0,1]
+
+def bfs(i,j):
+    queue = deque([i, j])
+    visited[i][j] = 1
+    cnt = 1
+
+    while queue:
+        x,y = queue.popleft()
+
+        for i in range(4):
+            new_x = x + dx[i]
+            new_y = y + dy[i]
+
+            if 0 <= new_x < n and 0<= new_y < m:
+                if canvas[new_x][new_y] != 0 and visited[new_x][new_y] == 0:
+                    canvas[x][y] = canvas[x][y] + 1
+                    visited[new_x][new_y] = 1
+                    cnt += 1
+                    queue.append([new_x,new_y])
+
+    paints.append(cnt)
+
+if __name__ == '__main__':
+    for i in range(n):
+        for j in range(m):
+            if canvas[i][j] == 1:
+                bfs(i,j)
+
+    if len(paints) == 0:
+        print(0)
+        print(0)
+    else:
+        print(len(paints))
+        print(max(paints))
+```
+
+## 2차 (알고리즘 오류)
+- cannot unpack non-iterable int object 오류 잡기 (선언과 추가로 나눠서)
+    - queue = deque() 
+    - queue.append([i, j])
+> 코드
+```python
+import sys
+from collections import deque
+
+input = sys.stdin.readline
+n, m = map(int,input().split())
+canvas = [list(map(int,input().split())) for _ in range(n)] # 제공된 판
+visited = [[0]*m for _ in range(n)] # 방문여부확인
+paints = [] # 그림들
+dx = [-1,0,1,0]
+dy = [0,-1,0,1]
+
+def bfs(i,j):
+    queue = deque() # cannot unpack non-iterable int object 오류 잡기
+    queue.append([i, j])
+    visited[i][j] = 1
+    cnt = 1
+
+    while queue:
+        x,y = queue.popleft()
+
+        for i in range(4):
+            new_x = x + dx[i]
+            new_y = y + dy[i]
+
+            if 0 <= new_x < n and 0<= new_y < m:
+                if canvas[new_x][new_y] != 0 and visited[new_x][new_y] == 0:
+                    canvas[x][y] = canvas[x][y] + 1
+                    visited[new_x][new_y] = 1
+                    cnt += 1
+                    queue.append([new_x,new_y])
+
+    paints.append(cnt)
+
+if __name__ == '__main__':
+    for i in range(n):
+        for j in range(m):
+            if canvas[i][j] == 1:
+                bfs(i,j)
+
+    if len(paints) == 0:
+        print(0)
+        print(0)
+    else:
+        print(len(paints))
+        print(max(paints))
+
+```
+
+## 3차 (성공)
+- 알고리즘 오류 수정
+   - 수정 전: `canvas[x][y] = canvas[x][y] + 1`
+   - 수정 후: `canvas[new_x][new_y] = canvas[x][y] + 1`
+> 코드
+```python
+import sys
+from collections import deque
+
+input = sys.stdin.readline
+n, m = map(int,input().split())
+canvas = [list(map(int,input().split())) for _ in range(n)] # 제공된 판
+visited = [[0]*m for _ in range(n)] # 방문여부확인
+paints = [] # 그림들
+dx = [-1,0,1,0]
+dy = [0,-1,0,1]
+
+def bfs(i,j):
+    queue = deque() # cannot unpack non-iterable int object 오류 잡기
+    queue.append([i, j])
+    visited[i][j] = 1
+    cnt = 1
+
+    while queue:
+        x,y = queue.popleft()
+
+        for i in range(4):
+            new_x = x + dx[i]
+            new_y = y + dy[i]
+
+            if 0 <= new_x < n and 0<= new_y < m:
+                if canvas[new_x][new_y] != 0 and visited[new_x][new_y] == 0:
+                    canvas[new_x][new_y] = canvas[x][y] + 1
+                    visited[new_x][new_y] = 1
+                    cnt += 1
+                    queue.append([new_x,new_y])
+
+    paints.append(cnt)
+
+if __name__ == '__main__':
+    for i in range(n):
+        for j in range(m):
+            if canvas[i][j] == 1:
+                bfs(i,j)
+
+    if len(paints) == 0:
+        print(0)
+        print(0)
+    else:
+        print(len(paints))
+        print(max(paints))
+```
+
+
+
 # 피드백
+- `TypeError: cannot unpack non-iterable int object` : "비문자적 정수형 객체 압축해제를 할 수 없음" 
+    - 오류 코드: `queue = deque([i, j])`
+    - 수정1: `queue = deque(); queue.append([i, j])` 
+    - 수정2: `queue = queue = deque([[i, j]]) # 괄호 두번 필요`
 
 
 > 참고: deque 사용 이유
