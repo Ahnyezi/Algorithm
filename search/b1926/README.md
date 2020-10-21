@@ -95,23 +95,6 @@ for i in range(n):
 <br>
 
 
-> 참고: deque 사용 이유
-- 정의
-   - deque: 스택과 큐를 합친 자료구조
-   - 가장자리에 원소를 넣거나 뺄 수 있음
-- 함수
-   - deque() : 초기화
-   - append(x) : x를 덱의 오른쪽에 삽입
-   - popleft() : 덱의 가장 왼쪽에 있는 원소를 제거, 해당 값을 리턴
-   - clear() : 모든 원소 삭제
-- 특징
-   - 큐 구현에 list를 사용하지 않음
-       - list도 사용가능. 하지만
-       - pop()의 시간복잡도는 O(1)
-       - pop(0)의 시간복잡도는 O(N)
-       - 따라서 시간복잡도를 고려해 list를 큐로 사용하지 않음
-
-
 ```python
 from collections import deque
 
@@ -137,9 +120,9 @@ def bfs(i,j):
             nx = x + dx[i]
             ny = y + dy[i]
 
-            if 0 <= nx < n and 0 <= ny < m:
-                if visited[nx][ny] == 0 and canvas[nx][ny] != 0:
-                    canvas[nx][ny] = canvas[x][y] + 1 # 현재까지 합한 그림 size (이거 안하면 틀려)
+            if 0 <= nx < n and 0 <= ny < m: # 범위 안에서만 check
+                if visited[nx][ny] == 0 and canvas[nx][ny] != 0: # 아직 방문 X and 배열방 1
+                    canvas[nx][ny] = canvas[x][y] + 1 # 현재까지 합한 그림 size (이미 연산완료했다는 check)
                     visited[nx][ny] = 1 # visited에 체크
 
                     cnt += 1
@@ -147,8 +130,8 @@ def bfs(i,j):
 
     paints.append(cnt) # 그림크기 (이어져있는 1개수)
 
-for i in range(n): # 세로로 한 줄씩 검사
-    for j in range(m): # 각 줄의 가장 첫번째 1이 나오는 방부터 bfs 처리
+for i in range(n): # 모든 배열을 검사
+    for j in range(m): # 1이지만 아직 처리도 안된 방을 검사 (처리 후:1 이상)
         if canvas[i][j] == 1:
             bfs(i,j)
 if len(paints) == 0:
@@ -159,3 +142,23 @@ else:
     print(max(paints))
 
 ```
+
+# 피드백
+
+
+> 참고: deque 사용 이유
+- 정의
+   - deque: 스택과 큐를 합친 자료구조
+   - 가장자리에 원소를 넣거나 뺄 수 있음
+- 함수
+   - deque() : 초기화
+   - append(x) : x를 덱의 오른쪽에 삽입
+   - popleft() : 덱의 가장 왼쪽에 있는 원소를 제거, 해당 값을 리턴
+   - clear() : 모든 원소 삭제
+- 특징
+   - 큐 구현에 list를 사용하지 않음
+       - list도 사용가능. 하지만
+       - pop()의 시간복잡도는 O(1)
+       - pop(0)의 시간복잡도는 O(N)
+       - 따라서 시간복잡도를 고려해 list를 큐로 사용하지 않음
+
