@@ -50,3 +50,34 @@ for _ in range(T):
             cnt += 1
     sys.stdout.write("{}\n".format(cnt))
 ```
+
+- 재귀 사용 O
+```python
+import sys
+sys.setrecursionlimit(111111)
+
+def dfs(x):
+    global result
+    visited[x] = True
+    cycle.append(x) # 사이클을 이루는 팀을 확인
+    number = numbers[x]
+
+    if visited[number]: # 방문가능한 곳이 끝났는지 확인
+        if number in cycle: # 사이클 가능 여부
+            result += cycle[cycle.index(number)] # 사이클이 되는 구간 부터만 팀 이름
+        return
+    else:
+        dfs(number)
+
+for _ in range(int(input())):
+    N = int(input())
+    numbers = [0] + list(map(int,input().split()))
+    visited = [True] + [False] * N # 방문 여부
+    result = []
+
+    for i in range(1, N+1):
+        if not visited[i]: # 방문 안한 곳이라면
+            cycle = []
+            dfs(i)
+
+```
