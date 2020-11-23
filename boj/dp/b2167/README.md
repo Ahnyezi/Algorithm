@@ -8,6 +8,7 @@ https://www.acmicpc.net/problem/2167
 2. dp에 사용할 점화식 구하기
 <img src="https://user-images.githubusercontent.com/62331803/99933919-c1d5db00-2d9f-11eb-9dc0-ba406ddb5dc5.jpg" width="40%">
 <br>
+
    - dp[3][3]을 구한다고 생각해보자.
       - dp[3][3]은 (0,0)부터(3,3)까지의 배열 원소를 모두 더한 값이다. 
       - 그림에 나와있는 arr배열에서 보면 보라색 영역의 넓이를 구하는 것이다. 
