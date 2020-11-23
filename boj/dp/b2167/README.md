@@ -2,6 +2,8 @@
 
 https://www.acmicpc.net/problem/2167
 
+<br>
+
 1. dp를 사용하여 푼다. 
    - 주어진 배열과 동일한 크기의 2차원 dp를 생성
    - `dp[i][j]`에는 0,0부터 i,j까지 원소의 합을 담는다.
@@ -24,7 +26,7 @@ https://www.acmicpc.net/problem/2167
 
 <br>
 
-# 풀이
+### 풀이
 
 ```python
 import sys
