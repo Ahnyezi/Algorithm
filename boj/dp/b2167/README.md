@@ -23,7 +23,9 @@ https://www.acmicpc.net/problem/2167
    -  `dp[i2][j2]-dp[i1-1][j2]-dp[i2][j1-1]+dp[i1-1][j1-1]`이다
 
 <br>
+
 # 풀이
+
 ```python
 import sys
 input = sys.stdin.readline
