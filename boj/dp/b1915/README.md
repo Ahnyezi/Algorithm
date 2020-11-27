@@ -18,6 +18,11 @@ bfs로 풀려고 했다가 정사각형이라는 조건을 확인하고 이중 f
 
 <br>
 
+> 최대 정사각형 변 길이가 3인 경우 예시 <br>
+
+<img src="https://user-images.githubusercontent.com/62331803/100404268-5d1ec700-30a4-11eb-850f-d676cc290609.png" width="50%">
+<br>
+<br>
 
 > 코드
 
