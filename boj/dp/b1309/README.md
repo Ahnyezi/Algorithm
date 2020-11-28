@@ -12,7 +12,7 @@
    - 전 행은 `(X,X)` or `(X,O)` or `(O,X)`여야 한다.
    - 따라서 이전 행의 `사자가 없는 경우의 값`, `오른쪽에 있는 경우의 값`, `왼쪽에 있는 경우의 값`을 모두 더하여 삽입한다.
 
-<img src="https://user-images.githubusercontent.com/62331803/100492384-c5d27600-316e-11eb-8215-a581ee94416b.png" width"30%">
+<img src="https://user-images.githubusercontent.com/62331803/100492384-c5d27600-316e-11eb-8215-a581ee94416b.png" width="30%">
 
 <br>
 
@@ -20,17 +20,19 @@
    - 전 행은 `(X,X)` or `(X,O)`여야 한다.
    - 따라서 이전 행의 `사자가 없는 경우의 값`, `오른쪽에 있는 경우의 값`을 더하여 삽입한다.
 
-<img src="https://user-images.githubusercontent.com/62331803/100492411-08944e00-316f-11eb-87f7-6221a95c23ff.png" width"30%">
+<img src="https://user-images.githubusercontent.com/62331803/100492411-08944e00-316f-11eb-87f7-6221a95c23ff.png" width="30%">
+
 <br>
 
 3) `(X,O)`: 추가되는 행의 오른쪽에 사자가 있을 경우
    - 전 행은 `(X,X)` or (O,X)여야 한다.
    - 따라서 이전 행의 `사자가 없는 경우의 값`,  `왼쪽에 있는 경우의 값`을 모두 더하여 삽입한다.
 
-<img src="https://user-images.githubusercontent.com/62331803/100492416-1649d380-316f-11eb-9c2c-166b7e7adb41.png" width"30%">
-<br>
-<br>
+<img src="https://user-images.githubusercontent.com/62331803/100492416-1649d380-316f-11eb-9c2c-166b7e7adb41.png" width="30%">
 
+<br>
+<br>
+<br>
 
 
 > 코드 
@@ -67,6 +69,7 @@ for i in range(n):
 print((no + left + right) % mod)
 ```
 
+<br>
 
 > 속도 비교<br>
 
